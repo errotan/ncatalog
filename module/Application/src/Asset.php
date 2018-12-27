@@ -37,15 +37,17 @@ class Asset
         }
 
         foreach ($mappings as $mapping) {
-            foreach (new \DirectoryIterator($mapping[0]) as $file) {
+            foreach (new \DirectoryIterator(realpath($mapping[0])) as $file) {
                 if ($file->isDot()) {
                     continue;
                 }
 
+                $dstPath = realpath($mapping[1]).'/'.$file->getFilename();
+
                 if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
-                    copy($file->getPathname(), $mapping[1].$file->getFilename());
-                } else {
-                    symlink($mapping[1].$file->getFilename(), $file->getPathname());
+                    copy($file->getPathname(), $dstPath);
+                } elseif (!is_file($dstPath)) {
+                    symlink($file->getPathname(), $dstPath);
                 }
             }
         }
