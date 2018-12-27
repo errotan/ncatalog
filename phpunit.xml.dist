@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit>
+    <logging>
+		<log type="coverage-clover" target="data/cache/cover/clover.xml"/>
+		<log type="coverage-html" target="data/cache/cover/"/>
+	</logging>
+    <filter>
+        <whitelist>
+            <directory>./module</directory>
+        </whitelist>
+    </filter>
     <testsuites>
         <testsuite>
             <directory>./module/Application/test</directory>
