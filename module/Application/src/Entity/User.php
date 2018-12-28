@@ -68,7 +68,7 @@ class User
      *
      * @return  self
      */
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
 
@@ -92,7 +92,7 @@ class User
      *
      * @return  self
      */
-    public function setFullName(string $fullName)
+    public function setFullName($fullName)
     {
         $this->fullName = $fullName;
 
@@ -116,7 +116,7 @@ class User
      *
      * @return  self
      */
-    public function setUsername(string $username)
+    public function setUsername($username)
     {
         $this->username = $username;
 
@@ -140,7 +140,7 @@ class User
      *
      * @return  self
      */
-    public function setEmail(string $email)
+    public function setEmail($email)
     {
         $this->email = $email;
 
@@ -164,7 +164,7 @@ class User
      *
      * @return  self
      */
-    public function setPassword(string $password)
+    public function setPassword($password)
     {
         $this->password = $password;
 

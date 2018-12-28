@@ -9,6 +9,7 @@
         "php": "^5.6",
         "components/font-awesome": "^5.4",
         "components/jquery": "^3.3",
+        "doctrine/data-fixtures": "^1.2",
         "doctrine/doctrine-orm-module": "^1.1",
         "twbs/bootstrap": "^4.2",
         "zendframework/zend-component-installer": "^1.0 || ^0.7",
@@ -28,7 +29,7 @@
     },
     "config": {
         "sort-packages": true
-    }, 
+    },
     "extra": [],
     "scripts": {
         "development-disable": "zf-development-mode disable",
@@ -39,16 +40,19 @@
         "asset-install": [
             "Application\\Utils\\Asset::install"
         ],
+        "fixtures-load": [
+            "Application\\Utils\\Doctrine::loadFixtures"
+        ],
         "post-install-cmd": [
             "@asset-install"
         ],
         "post-update-cmd": [
             "@asset-install"
-        ] 
+        ]
     },
     "require-dev": {
         "php-coveralls/php-coveralls": "^2.1",
-        "phpunit/phpcov": "^3.0", 
+        "phpunit/phpcov": "^3.0",
         "zendframework/zend-developer-tools": "^1.2",
         "zendframework/zend-test": "^3.2"
     }
