@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit>
     <logging>
-		<log type="coverage-clover" target="data/cache/cover/clover.xml"/>
+		<log type="coverage-clover" target="coverage.xml"/>
 		<log type="coverage-html" target="data/cache/cover/"/>
 	</logging>
     <filter>
