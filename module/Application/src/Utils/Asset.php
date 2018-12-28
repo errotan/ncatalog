@@ -54,9 +54,9 @@ final class Asset
     protected function createDirs()
     {
         if (!is_dir(Asset::CSSDIR)) {
-            mkdir(Asset::CSSDIR, 0744, true);
-            mkdir(Asset::JSDIR, 0744, true);
-            mkdir(Asset::FONTDIR, 0744, true);
+            mkdir(Asset::CSSDIR, 0755, true);
+            mkdir(Asset::JSDIR, 0755, true);
+            mkdir(Asset::FONTDIR, 0755, true);
         }
     }
 
