@@ -37,7 +37,7 @@
         "serve": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit",
         "asset-install": [
-            "Application\\Asset::install"
+            "Application\\Utils\\Asset::install"
         ],
         "post-install-cmd": [
             "@asset-install"
