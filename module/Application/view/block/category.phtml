@@ -1,0 +1,18 @@
+<li class="dropdown-submenu">
+    <a class="dropdown-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <?= $category->getName() ?>
+    </a>
+    <ul class="dropdown-menu">
+        <?php foreach ($category->childs as $child): ?>
+            <?php
+
+            if (!empty($child->childs)) {
+                echo $this->partial('block/category', ['category' => $child]);
+            } else {
+                echo '<li><a class="dropdown-item" href="#">'.$child->getName().'</a></li>';
+            }
+
+            ?>
+        <?php endforeach; ?>
+    </ul>
+</li>

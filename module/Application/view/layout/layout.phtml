@@ -16,17 +16,13 @@
         ?>
 
         <?= $this->headScript()
+            ->prependFile($this->basePath('js/core.js'))
             ->prependFile($this->basePath('vendor/js/bootstrap.min.js'))
             ->prependFile($this->basePath('vendor/js/jquery.min.js'))
         ?>
     </head>
     <body>
-        <div class="container">
-            <?= $this->content ?>
-            <footer>
-                <p>&copy; 2018 Puskás Zsolt &lt;errotan@gmail.com&gt; - Terjeszthető az MIT licensz feltételei szerint</p>
-            </footer>
-        </div>
+        <?= $this->content ?>
         <?= $this->inlineScript() ?>
     </body>
 </html>
