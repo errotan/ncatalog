@@ -9,7 +9,6 @@ namespace Application;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -24,13 +23,55 @@ return [
                     ],
                 ],
             ],
-            'application' => [
+            'category' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'    => '/application[/:action]',
-                    'defaults' => [
+                    'route'       => '/category/:categoryId',
+                    'constraints' => [
+                        'categoryId' => '\d+',
+                    ],
+                    'defaults'    => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'index',
+                    ],
+                ],
+            ],
+            'category_edit' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/category/edit/:categoryId',
+                    'constraints' => [
+                        'categoryId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\CategoryController::class,
+                        'action'     => 'edit',
+                    ],
+                ],
+            ],
+            'category_new' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/category/new/:parentId',
+                    'constraints' => [
+                        'parentId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\CategoryController::class,
+                        'action'     => 'new',
+                    ],
+                ],
+            ],
+            'category_delete' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/category/delete/:categoryId',
+                    'constraints' => [
+                        'categoryId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\CategoryController::class,
+                        'action'     => 'delete',
                     ],
                 ],
             ],
@@ -39,11 +80,12 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
+            Controller\CategoryController::class => Controller\Factory\CategoryControllerFactory::class,
         ],
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
+        'display_exceptions'       => false,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',

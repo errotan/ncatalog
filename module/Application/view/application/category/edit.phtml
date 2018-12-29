@@ -1,0 +1,7 @@
+<h4>Kategória szerkesztése</h4>
+<form method="post" action="<?= $this->basePath('category/edit/'.$category->getId()) ?>">
+  <div class="form-group">
+    <label for="input1">Kategória név</label>
+    <input type="text" class="form-control" id="input1" name="name" value="<?= $category->getName() ?>">
+  </div>
+</form>

@@ -16,6 +16,8 @@ namespace Application\Repository;
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
+     * Returns a tree like array of all categories.
+     *
      * @return array
      */
     public function findAllAsTree()
@@ -34,5 +36,24 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $childs[0];
+    }
+
+    /**
+     * Returns an array which contains the category and parent category names.
+     *
+     * @param int $categoryId category id
+     *
+     * @return array
+     */
+    public function findPath($categoryId)
+    {
+        if (0 === $categoryId) {
+            return [];
+        }
+
+        $category = $this->find($categoryId);
+        $pathName = array_merge($this->findPath($category->getParentId()), [$category->getName()]);
+
+        return array_filter($pathName);
     }
 }

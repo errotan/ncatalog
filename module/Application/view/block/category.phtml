@@ -1,18 +1,14 @@
 <li class="dropdown-submenu">
-    <a class="dropdown-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="dropdown-item" href="<?= $this->basePath('category/'.$category->getId()) ?>" role="button" aria-haspopup="true" aria-expanded="false">
         <?= $category->getName() ?>
     </a>
     <ul class="dropdown-menu">
+        <?php if (!empty($category->childs)): ?>
         <?php foreach ($category->childs as $child): ?>
-            <?php
-
-            if (!empty($child->childs)) {
-                echo $this->partial('block/category', ['category' => $child]);
-            } else {
-                echo '<li><a class="dropdown-item" href="#">'.$child->getName().'</a></li>';
-            }
-
-            ?>
+            <?= $this->partial('block/category', ['category' => $child]) ?>
         <?php endforeach; ?>
+        <div class="dropdown-divider"></div>
+        <?php endif; ?>
+        <li><a class="dropdown-item js-modal-load" href="#" data-url="<?= $this->basePath('category/new/'.$category->getId()) ?>" data-toggle="modal" data-target="#modal">Új alkategória</a></li>
     </ul>
 </li>
