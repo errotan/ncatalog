@@ -9,6 +9,8 @@ php:
 
 before_install:
   - composer install
+  - cp config/autoload/doctrine.sqlite.local.php.dist config/autoload/doctrine.local.php
+  - composer fixtures-load
 
 script:
   - vendor/bin/phpunit
