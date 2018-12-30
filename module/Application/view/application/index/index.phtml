@@ -49,6 +49,7 @@
                     <th scope="col">Feltöltő</th>
                     <th scope="col">Eredeti fájlnév</th>
                     <th scope="col">Verzió</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -57,8 +58,13 @@
                         <th scope="row"><?= ++$i ?></th>
                         <td><?= $file->getUploadedAt()->format('Y-m-d H:i:s') ?></td>
                         <td><?= $file->getUploadedBy()->getFullName() ?></td>
-                        <td><?= $file->getOriginalName() ?></td>
+                        <td><a href="<?= $this->basePath('file/download/'.$file->getId()) ?>"><?= $file->getOriginalName() ?></a></td>
                         <td><?= $file->getVersion() ?>.0</td>
+                        <td>
+                            <?php if ($file->getVersion() > 1): ?>
+                            <i class="fas fa-sm fa-history pointer js-modal2-load" data-url="<?= $this->basePath('file/history/'.$file->getId()) ?>" data-toggle="modal" data-target="#modal2" title="Fájl történet"></i>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -86,6 +92,19 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Bezárás</button>
                     <button type="button" class="btn btn-primary js-modal-submit">Mentés</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bd-example-modal-lg" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Listázás</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">...</div>
             </div>
         </div>
     </div>

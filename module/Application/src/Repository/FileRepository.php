@@ -18,7 +18,7 @@ class FileRepository extends \Doctrine\ORM\EntityRepository
     const STOREDIR = 'data/files';
 
     /**
-     * Find already uploaded file with same name.
+     * Find already uploaded last file with same name.
      *
      * @param int    $categoryId   file in category id
      * @param string $originalName orginal file name
@@ -28,5 +28,18 @@ class FileRepository extends \Doctrine\ORM\EntityRepository
     public function alreadyUploaded($categoryId, $originalName)
     {
         return $this->findOneBy(['categoryId' => $categoryId, 'originalName' => $originalName], ['version' => 'DESC']);
+    }
+
+    /**
+     * Find already uploaded files with same name.
+     *
+     * @param int    $categoryId   file in category id
+     * @param string $originalName orginal file name
+     *
+     * @return array
+     */
+    public function alreadyUploadeds($categoryId, $originalName)
+    {
+        return $this->findBy(['categoryId' => $categoryId, 'originalName' => $originalName]);
     }
 }

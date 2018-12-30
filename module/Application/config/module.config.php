@@ -88,6 +88,32 @@ return [
                     ],
                 ],
             ],
+            'file_download' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/file/download/:fileId',
+                    'constraints' => [
+                        'fileId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\FileController::class,
+                        'action'     => 'download',
+                    ],
+                ],
+            ],
+            'file_history' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/file/history/:fileId',
+                    'constraints' => [
+                        'fileId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\FileController::class,
+                        'action'     => 'history',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

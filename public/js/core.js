@@ -16,12 +16,20 @@ $(function() {
         let url = $(this).data('url');
 
         $.get(url, function(response) {
-            $('.modal-body').html(response);
+            $('#modal .modal-body').html(response);
+        })
+    });
+
+    $('.js-modal2-load').on('click', function () {
+        let url = $(this).data('url');
+
+        $.get(url, function(response) {
+            $('#modal2 .modal-body').html(response);
         })
     });
 
     $('.js-modal-submit').on('click', function () {
-        let form = $('.modal-body').find('form');
+        let form = $('#modal .modal-body').find('form');
         let values = new FormData(form[0]);
 
         $.ajax(form.attr('action'), {

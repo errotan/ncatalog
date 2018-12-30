@@ -9,6 +9,8 @@ namespace Application\Controller;
 
 use Zend\Filter\HtmlEntities;
 use Zend\View\Model\ViewModel;
+use Zend\Http\Response\Stream;
+use Zend\Http\Headers;
 use Application\Entity\Category;
 use Application\Entity\File;
 use Application\Entity\User;
@@ -81,5 +83,61 @@ class FileController extends AbstractController
         move_uploaded_file($uploadedFile['tmp_name'], FileRepository::STOREDIR.'/'.$file->getId());
 
         return $this->getResponse();
+    }
+
+    /**
+     * @return Response
+     */
+    public function downloadAction()
+    {
+        $fileId = $this->params()->fromRoute('fileId');
+        $path = FileRepository::STOREDIR.'/'.$fileId;
+        $file = $this->em->getRepository(File::class)->find($fileId);
+
+        if (!is_readable($path) || !$file) {
+            // no not found exception in zend :(
+            return $this->getResponse()->setStatusCode(404)->setContent('A kért fájl nem található!');
+        }
+
+        $response = new Stream();
+        $response->setStream(fopen($path, 'r'));
+        $response->setStatusCode(200);
+        $response->setStreamName($file->getOriginalName());
+
+        $headers = new Headers();
+        $headers->addHeaders([
+            'Content-Disposition' => 'attachment; filename="'.$file->getOriginalName().'"',
+            'Content-Type' => 'application/octet-stream',
+            'Content-Length' => filesize($path),
+            'Expires' => '@0',
+            'Cache-Control' => 'must-revalidate',
+            'Pragma' => 'public',
+        ]);
+
+        $response->setHeaders($headers);
+
+        return $response;
+    }
+
+    /**
+     * @return ViewModel
+     */
+    public function historyAction()
+    {
+        $file = $this->em->getRepository(File::class)->find($this->params()->fromRoute('fileId'));
+
+        if (!$file) {
+            // no not found exception in zend :(
+            return $this->getResponse()->setStatusCode(404)->setContent('A kért fájl történt nem található!');
+        }
+
+        $files = $this->em
+            ->getRepository(File::class)
+            ->alreadyUploadeds($file->getCategoryId(), $file->getOriginalName());
+
+        $view = new ViewModel(['files' => $files]);
+        $view->setTerminal(true);
+
+        return $view;
     }
 }
