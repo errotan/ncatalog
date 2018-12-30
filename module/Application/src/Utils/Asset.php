@@ -66,23 +66,34 @@ final class Asset
     protected function makeAssetPublic()
     {
         foreach ($this->mappings as $mapping) {
-            foreach (new \DirectoryIterator(realpath($mapping[0])) as $file) {
-                if ($file->isDot()) {
-                    continue;
-                }
-
-                $this->symlinkOrCopy($file->getPathname(), realpath($mapping[1]).'/'.$file->getFilename());
-            }
+            $this->symlinkOrCopyDirectory($mapping[0], $mapping[1]);
         }
     }
 
     /**
-     * @param string $src source path
-     * @param string $dst destination path
+     * @param string $src source dir
+     * @param string $dst destination dir
      *
      * @return void
      */
-    protected function symlinkOrCopy($src, $dst)
+    protected function symlinkOrCopyDirectory($src, $dst)
+    {
+        foreach (new \DirectoryIterator(realpath($src)) as $file) {
+            if ($file->isDot()) {
+                continue;
+            }
+
+            $this->symlinkOrCopyFile($file->getPathname(), realpath($dst).'/'.$file->getFilename());
+        }
+    }
+
+    /**
+     * @param string $src source file
+     * @param string $dst destination file
+     *
+     * @return void
+     */
+    protected function symlinkOrCopyFile($src, $dst)
     {
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             copy($src, $dst);
