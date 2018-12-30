@@ -4,6 +4,7 @@ html/
 config/development.config.php
 data/cache/*
 !data/cache/.gitkeep
+data/DoctrineORMModule/
 phpunit.xml
 coverage.xml
 db.sqlite
