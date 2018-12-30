@@ -11,21 +11,21 @@ function showSuccessAndGoHome() {
     location.replace('/');
 }
 
+function modalLoad(element, tagSuffix) {
+    let url = $(element).data('url');
+
+    $.get(url, function(response) {
+        $('#modal' + tagSuffix + ' .modal-body').html(response);
+    });
+}
+
 $(function() {
     $('.js-modal-load').on('click', function () {
-        let url = $(this).data('url');
-
-        $.get(url, function(response) {
-            $('#modal .modal-body').html(response);
-        })
+        modalLoad(this, '');
     });
 
     $('.js-modal2-load').on('click', function () {
-        let url = $(this).data('url');
-
-        $.get(url, function(response) {
-            $('#modal2 .modal-body').html(response);
-        })
+        modalLoad(this, '2');
     });
 
     $('.js-modal-submit').on('click', function () {
