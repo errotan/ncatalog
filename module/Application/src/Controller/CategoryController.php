@@ -7,32 +7,16 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Filter\HtmlEntities;
 use Zend\View\Model\ViewModel;
-use Doctrine\ORM\EntityManager;
 use Application\Entity\Category;
+use Application\Controller\AbstractController;
 
 /**
  * Holds methods for category manipulation.
  */
-class CategoryController extends AbstractActionController
+class CategoryController extends AbstractController
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
-    /**
-     * @param EntityManager $em database access object
-     *
-     * @return void
-     */
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
     /**
      * @return ViewModel|Response
      */

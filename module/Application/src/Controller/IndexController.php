@@ -7,31 +7,16 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Doctrine\ORM\EntityManager;
 use Application\Entity\Category;
+use Application\Entity\File;
+use Application\Controller\AbstractController;
 
 /**
  * Contains file lister by category.
  */
-class IndexController extends AbstractActionController
+class IndexController extends AbstractController
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
-    /**
-     * @param EntityManager $em database access object
-     *
-     * @return void
-     */
-    public function __construct(EntityManager $em)
-    {
-        $this->em = $em;
-    }
-
     /**
      * Home page and file lister.
      *
@@ -45,9 +30,11 @@ class IndexController extends AbstractActionController
 
         if ($categoryId = $this->params()->fromRoute('categoryId')) {
             $categoryPath = $repository->findPath($categoryId);
+            $files = $this->em->getRepository(File::class)->findBy(['categoryId' => $categoryId, 'overriden' => 0]);
 
             $view->setVariables(['categoryPath' => $categoryPath]);
             $view->setVariables(['categoryId' => $categoryId]);
+            $view->setVariables(['files' => $files]);
         }
 
         return $view;

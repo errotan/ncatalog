@@ -75,12 +75,26 @@ return [
                     ],
                 ],
             ],
+            'file' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/file/:action/:categoryId',
+                    'constraints' => [
+                        'categoryId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\FileController::class,
+                        'action'     => 'upload',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
-            Controller\CategoryController::class => Controller\Factory\CategoryControllerFactory::class,
+            Controller\IndexController::class => Controller\Factory\DefaultControllerFactory::class,
+            Controller\CategoryController::class => Controller\Factory\DefaultControllerFactory::class,
+            Controller\FileController::class => Controller\Factory\DefaultControllerFactory::class,
         ],
     ],
     'view_manager' => [

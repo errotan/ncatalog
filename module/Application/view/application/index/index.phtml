@@ -1,6 +1,6 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="<?= $this->basePath('/') ?>">
+        <a class="navbar-brand mr-0" href="<?= $this->basePath('/') ?>">
             <img src="<?= $this->basePath('img/logo.png') ?>" width="32" height="32" alt="Logo" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
             </li>
             </ul>
             <i class="fas fa-lg fa-user-lock ml-3 pointer" title="Jogosultságok"></i>
-            <i class="fas fa-lg fa-sign-out-alt ml-3 pointer" title="Kilépés"></i>
+            <i class="fas fa-lg fa-sign-out-alt ml-3 pointer" title="Kijelentkezés"></i>
         </div>
     </nav>
     <?php if (isset($categoryPath)): ?>
@@ -34,17 +34,43 @@
                     <li class="breadcrumb-item"><?= $category ?></li>
                 <?php endforeach; ?>
                 <li>
-                    <i class="fas fa-sm fa-upload ml-3 pointer" title="Fájl feltöltés"></i>
+                    <i class="fas fa-sm fa-upload ml-3 pointer js-modal-load" data-url="<?= $this->basePath('file/upload/'.$categoryId) ?>" data-toggle="modal" data-target="#modal" title="Fájl feltöltés"></i>
                     <i class="fas fa-sm fa-edit ml-1 pointer js-modal-load" data-url="<?= $this->basePath('category/edit/'.$categoryId) ?>" data-toggle="modal" data-target="#modal" title="Kategória szerkesztés"></i>
                     <i class="fas fa-sm fa-trash-alt ml-1 pointer js-confirm" data-url="<?= $this->basePath('category/delete/'.$categoryId) ?>" title="Kategória törlés"></i>
                 </li>
             </ol>
         </nav>
+        <?php if (!empty($files)): ?>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Feltöltés ideje</th>
+                    <th scope="col">Feltöltő</th>
+                    <th scope="col">Eredeti fájlnév</th>
+                    <th scope="col">Verzió</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($files as $file): ?>
+                    <tr>
+                        <th scope="row"><?= ++$i ?></th>
+                        <td><?= $file->getUploadedAt()->format('Y-m-d H:i:s') ?></td>
+                        <td><?= $file->getUploadedBy()->getFullName() ?></td>
+                        <td><?= $file->getOriginalName() ?></td>
+                        <td><?= $file->getVersion() ?>.0</td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php else: ?>
+        <div class="alert alert-primary mt-3" role="alert">Nincs megjelenítendő elem!</div>
+        <?php endif; ?>
     <?php else: ?>
-        <p class="mt-3">Válasszon kategóriát!</p>
+        <div class="alert alert-primary mt-3" role="alert">Válasszon kategóriát!</div>
     <?php endif; ?>
     <footer class="mt-3">
-        <small>&copy; 2018 Puskás Zsolt &lt;errotan@gmail.com&gt; - Terjeszthető az MIT licensz feltételei szerint</small>
+        <small>&copy; 2018 Puskás Zsolt &lt;errotan@gmail.com&gt; - Terjeszthető az MIT licensz feltételei szerint.</small>
     </footer>
     <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

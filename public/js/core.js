@@ -22,10 +22,19 @@ $(function() {
 
     $('.js-modal-submit').on('click', function () {
         let form = $('.modal-body').find('form');
+        let values = new FormData(form[0]);
 
-        $.post(form.attr('action'), form.serialize(), function() {
+        $.ajax(form.attr('action'), {
+            processData: false,
+            cache: false,
+            contentType: false,
+            type: 'POST',
+            data: values
+        }).done(function() {
             showSuccessAndReload();
-        })
+        }).fail(function() {
+            alert('Hiba történt a kérés elküldésekor!');
+        });
     });
 
     $('.js-confirm').on('click', function () {
