@@ -67,7 +67,6 @@ final class Doctrine
         $loader = new Loader();
         $loader->loadFromDirectory('module/Application/src/DataFixtures');
         $purger = new ORMPurger();
-        $purger->setPurgeMode(ORMPurger::PURGE_MODE_TRUNCATE);
         $executor = new ORMExecutor($this->em, $purger);
         $executor->execute($loader->getFixtures());
     }
