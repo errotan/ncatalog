@@ -41,6 +41,6 @@ class UserFixtures implements FixtureInterface
         $manager->persist($user);
         $manager->flush();
 
-        echo 'Admin password is: '.$password;
+        echo 'Admin password is: '.$password."\n";
     }
 }
