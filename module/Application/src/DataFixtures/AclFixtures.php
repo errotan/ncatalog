@@ -28,9 +28,14 @@ class AclFixtures extends AbstractFixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        $metadata = $manager->getClassMetaData(Acl::class);
+        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new AssignedGenerator());
+
         $user = $manager->find(User::class, 1);
 
         $acl = (new Acl())
+            ->setId(1)
             ->setUser($user)
             ->setCanCreateCategory(true)
             ->setCanUpload(true)

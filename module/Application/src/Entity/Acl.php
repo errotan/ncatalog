@@ -77,7 +77,7 @@ class Acl
      *
      * @return self
      */
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
 
