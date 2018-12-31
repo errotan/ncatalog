@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit>
+<phpunit bootstrap="module/Application/test/bootstrap.php">
     <logging>
 		<log type="coverage-clover" target="coverage.xml"/>
 		<log type="coverage-html" target="data/cache/cover/"/>
