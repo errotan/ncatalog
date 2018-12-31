@@ -81,6 +81,9 @@ class CategoryController extends AbstractController
         if ($category) {
             $this->em->remove($category);
             $this->em->flush();
+        } else {
+            // no not found exception in zend :(
+            return $this->getResponse()->setStatusCode(404)->setContent('A kért kategória nem található!');
         }
 
         return $this->getResponse();
