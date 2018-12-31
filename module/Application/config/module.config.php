@@ -114,13 +114,37 @@ return [
                     ],
                 ],
             ],
+            'acl' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/acl',
+                    'defaults'    => [
+                        'controller' => Controller\AclController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'acl_list' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/acl/list/:userId',
+                    'constraints' => [
+                        'userId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\AclController::class,
+                        'action'     => 'list',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => Controller\Factory\DefaultControllerFactory::class,
+            Controller\AclController::class => Controller\Factory\DefaultControllerFactory::class,
             Controller\CategoryController::class => Controller\Factory\DefaultControllerFactory::class,
             Controller\FileController::class => Controller\Factory\DefaultControllerFactory::class,
+            Controller\IndexController::class => Controller\Factory\DefaultControllerFactory::class,
         ],
     ],
     'view_manager' => [

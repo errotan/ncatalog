@@ -22,7 +22,7 @@
                 </ul>
             </li>
             </ul>
-            <i class="fas fa-lg fa-user-lock ml-3 pointer" title="Jogosultságok"></i>
+            <i class="fas fa-lg fa-user-lock ml-3 pointer js-modal-lister-load" data-url="<?= $this->basePath('acl') ?>" data-toggle="modal" data-target="#modal-lister" title="Jogosultságok"></i>
             <i class="fas fa-lg fa-sign-out-alt ml-3 pointer" title="Kijelentkezés"></i>
         </div>
     </nav>
@@ -62,7 +62,7 @@
                         <td><?= $file->getVersion() ?>.0</td>
                         <td>
                             <?php if ($file->getVersion() > 1): ?>
-                            <i class="fas fa-sm fa-history pointer js-modal2-load" data-url="<?= $this->basePath('file/history/'.$file->getId()) ?>" data-toggle="modal" data-target="#modal2" title="Fájl történet"></i>
+                            <i class="fas fa-sm fa-history pointer js-modal-lister-load" data-url="<?= $this->basePath('file/history/'.$file->getId()) ?>" data-toggle="modal" data-target="#modal-lister" title="Fájl történet"></i>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -95,7 +95,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bd-example-modal-lg" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" id="modal-lister" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -1,0 +1,26 @@
+<h5><?= $user->getFullName() ?> felhasználó jogosultságai</h5>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kategória</th>
+            <th scope="col">Készíthet alkategóriát</th>
+            <th scope="col">Feltölthet</th>
+            <th scope="col">Letölthet</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($acls as $acl): ?>
+            <tr>
+                <th scope="row"><?= ++$i ?></th>
+                <td><?= $acl->getCategory() ? $acl->getCategory()->getName() : '-minden-' ?></td>
+                <td><?= $acl->getCanCreateCategory() ? 'Igen' : 'Nem' ?></td>
+                <td><?= $acl->getCanUpload() ? 'Igen' : 'Nem' ?></td>
+                <td><?= $acl->getCanDownload() ? 'Igen' : 'Nem' ?></td>
+                <td><i class="fas fa-sm fa-edit pointer" title="Jogosultság szerkesztés"></i></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary">Új jogosultság</button>

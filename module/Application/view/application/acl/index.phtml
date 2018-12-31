@@ -1,0 +1,19 @@
+<h5>Jogosultságok</h5>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th class="w-100" scope="col">Felhasználó</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($users as $user): ?>
+            <tr>
+                <th scope="row"><?= ++$i ?></th>
+                <td><?= $user->getFullName() ?></td>
+                <td><i class="fas fa-sm fa-edit pointer js-modal-lister-load" data-url="<?= $this->basePath('acl/list/'.$user->getId()) ?>" title="Jogosultság szerkesztés"></i></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
