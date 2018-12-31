@@ -35,4 +35,22 @@ class AclControllerTest extends AbstractHttpControllerTestCase
         $this->dispatch('/acl/list/1', 'GET');
         $this->assertResponseStatusCode(200);
     }
+
+    public function testEditActionCanBeAccessed()
+    {
+        $this->dispatch('/acl/edit/1', 'GET');
+        $this->assertResponseStatusCode(200);
+    }
+
+    public function testNewActionCanBeAccessed()
+    {
+        $this->dispatch('/acl/new/1', 'GET');
+        $this->assertResponseStatusCode(200);
+    }
+
+    public function testDeleteActionTryingToDeleteNoneExistent()
+    {
+        $this->dispatch('/acl/delete/0', 'GET');
+        $this->assertResponseStatusCode(404);
+    }
 }

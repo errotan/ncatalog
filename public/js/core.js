@@ -30,7 +30,7 @@ $(function() {
         modalLoad(this, true);
     });
 
-    $('.js-modal-submit').on('click', function () {
+    $(document).on('click', '.js-modal-submit', function () {
         let form = $('#modal .modal-body').find('form');
         let values = new FormData(form[0]);
 
@@ -42,12 +42,12 @@ $(function() {
             data: values
         }).done(function() {
             showSuccessAndReload();
-        }).fail(function() {
-            alert('Hiba történt a kérés elküldésekor!');
+        }).fail(function(jqXHR) {
+            alert('Hiba történt a kérés elküldésekor! ' + jqXHR.responseText);
         });
     });
 
-    $('.js-confirm').on('click', function () {
+    $(document).on('click', '.js-confirm', function () {
         if (confirm('Biztos benne, hogy végrehajtja a műveletet?')) {
             let url = $(this).data('url');
 

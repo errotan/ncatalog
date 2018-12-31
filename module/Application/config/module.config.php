@@ -137,6 +137,45 @@ return [
                     ],
                 ],
             ],
+            'acl_edit' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/acl/edit/:aclId',
+                    'constraints' => [
+                        'aclId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\AclController::class,
+                        'action'     => 'edit',
+                    ],
+                ],
+            ],
+            'acl_new' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/acl/new/:userId',
+                    'constraints' => [
+                        'userId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\AclController::class,
+                        'action'     => 'new',
+                    ],
+                ],
+            ],
+            'acl_delete' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'       => '/acl/delete/:aclId',
+                    'constraints' => [
+                        'aclId' => '\d+',
+                    ],
+                    'defaults'    => [
+                        'controller' => Controller\AclController::class,
+                        'action'     => 'delete',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [

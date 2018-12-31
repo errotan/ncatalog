@@ -33,8 +33,6 @@ class CategoryController extends AbstractController
             return $this->getResponse()->setStatusCode(404)->setContent('A kért kategória nem található!');
         }
 
-        $view->setVariables(['category' => $category]);
-
         if ('POST' === $this->getRequest()->getMethod()) {
             $filter = new HtmlEntities();
             $category->setName($filter->filter($this->params()->fromPost('name')));
@@ -42,6 +40,8 @@ class CategoryController extends AbstractController
             $this->em->persist($category);
             $this->em->flush();
         }
+
+        $view->setVariables(['category' => $category]);
 
         return $view;
     }
@@ -83,7 +83,7 @@ class CategoryController extends AbstractController
             $this->em->flush();
         } else {
             // no not found exception in zend :(
-            return $this->getResponse()->setStatusCode(404)->setContent('A kért kategória nem található!');
+            return $this->getResponse()->setStatusCode(404)->setContent('A törlendő kategória nem található!');
         }
 
         return $this->getResponse();

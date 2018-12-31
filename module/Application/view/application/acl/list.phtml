@@ -18,9 +18,12 @@
                 <td><?= $acl->getCanCreateCategory() ? 'Igen' : 'Nem' ?></td>
                 <td><?= $acl->getCanUpload() ? 'Igen' : 'Nem' ?></td>
                 <td><?= $acl->getCanDownload() ? 'Igen' : 'Nem' ?></td>
-                <td><i class="fas fa-sm fa-edit pointer" title="Jogosultság szerkesztés"></i></td>
+                <td>
+                    <i class="fas fa-sm fa-edit pointer js-modal-load" data-url="<?= $this->basePath('acl/edit/'.$acl->getId()) ?>" data-toggle="modal" data-target="#modal" title="Jogosultság szerkesztés"></i>
+                    <i class="fas fa-sm fa-trash-alt ml-1 pointer js-confirm" data-url="<?= $this->basePath('acl/delete/'.$acl->getId()) ?>" title="Jogosultság törlés"></i>
+                </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-<button type="button" class="btn btn-primary">Új jogosultság</button>
+<button type="button" class="btn btn-primary js-modal-load" data-url="<?= $this->basePath('acl/new/'.$user->getId()) ?>" data-toggle="modal" data-target="#modal">Új jogosultság</button>
