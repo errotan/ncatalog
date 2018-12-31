@@ -52,7 +52,7 @@ return [
             'category_new' => [
                 'type'    => Segment::class,
                 'options' => [
-                    'route'       => '/category/new/:parentId',
+                    'route'       => '/category/new/[:parentId]',
                     'constraints' => [
                         'parentId' => '\d+',
                     ],

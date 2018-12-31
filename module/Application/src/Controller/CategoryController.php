@@ -56,9 +56,13 @@ class CategoryController extends AbstractController
 
         if ('POST' === $this->getRequest()->getMethod()) {
             $filter = new HtmlEntities();
-            $category = new Category();
-            $category->setName($filter->filter($this->params()->fromPost('name')));
-            $category->setParentId($this->params()->fromRoute('parentId'));
+            $category = (new Category())
+                ->setName($filter->filter($this->params()->fromPost('name')));
+
+            if ($parentId = $this->params()->fromRoute('parentId')) {
+                $parentCategory = $this->em->getRepository(Category::class)->find($parentId);
+                $category->setParent($parentCategory);
+            }
 
             $this->em->persist($category);
             $this->em->flush();

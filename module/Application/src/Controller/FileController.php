@@ -61,7 +61,7 @@ class FileController extends AbstractController
         $version = 1;
 
         if ($alreadyUploadedFile) {
-            $alreadyUploadedFile->setOverriden(1);
+            $alreadyUploadedFile->setOverriden(true);
 
             $this->em->persist($alreadyUploadedFile);
 
@@ -69,13 +69,13 @@ class FileController extends AbstractController
         }
 
         // store file
-        $file = new File();
-        $file->setUploadedBy($user);
-        $file->setCategoryId($category);
-        $file->setOriginalName($originalName);
-        $file->setDisplayName($originalName);
-        $file->setVersion($version);
-        $file->setOverriden(0);
+        $file = (new File())
+            ->setUploadedBy($user)
+            ->setCategory($category)
+            ->setOriginalName($originalName)
+            ->setDisplayName($originalName)
+            ->setVersion($version)
+            ->setOverriden(false);
 
         $this->em->persist($file);
         $this->em->flush();
@@ -128,12 +128,12 @@ class FileController extends AbstractController
 
         if (!$file) {
             // no not found exception in zend :(
-            return $this->getResponse()->setStatusCode(404)->setContent('A kért fájl történt nem található!');
+            return $this->getResponse()->setStatusCode(404)->setContent('A kért fájl történet nem található!');
         }
 
         $files = $this->em
             ->getRepository(File::class)
-            ->alreadyUploadeds($file->getCategoryId(), $file->getOriginalName());
+            ->alreadyUploadeds($file->getCategory()->getId(), $file->getOriginalName());
 
         $view = new ViewModel(['files' => $files]);
         $view->setTerminal(true);

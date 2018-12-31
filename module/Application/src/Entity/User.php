@@ -54,7 +54,7 @@ class User
     /**
      * Get the value of id
      *
-     * @return  int
+     * @return int
      */
     public function getId()
     {
@@ -64,9 +64,9 @@ class User
     /**
      * Set the value of id
      *
-     * @param  int  $id
+     * @param int $id
      *
-     * @return  self
+     * @return self
      */
     public function setId($id)
     {
@@ -78,7 +78,7 @@ class User
     /**
      * Get the value of fullName
      *
-     * @return  string
+     * @return string
      */
     public function getFullName()
     {
@@ -88,9 +88,9 @@ class User
     /**
      * Set the value of fullName
      *
-     * @param  string  $fullName
+     * @param string $fullName
      *
-     * @return  self
+     * @return self
      */
     public function setFullName($fullName)
     {
@@ -102,7 +102,7 @@ class User
     /**
      * Get the value of username
      *
-     * @return  string
+     * @return string
      */
     public function getUsername()
     {
@@ -112,9 +112,9 @@ class User
     /**
      * Set the value of username
      *
-     * @param  string  $username
+     * @param string $username
      *
-     * @return  self
+     * @return self
      */
     public function setUsername($username)
     {
@@ -126,7 +126,7 @@ class User
     /**
      * Get the value of email
      *
-     * @return  string
+     * @return string
      */
     public function getEmail()
     {
@@ -136,9 +136,9 @@ class User
     /**
      * Set the value of email
      *
-     * @param  string  $email
+     * @param string $email
      *
-     * @return  self
+     * @return self
      */
     public function setEmail($email)
     {
@@ -150,7 +150,7 @@ class User
     /**
      * Get the value of password
      *
-     * @return  string
+     * @return string
      */
     public function getPassword()
     {
@@ -160,9 +160,9 @@ class User
     /**
      * Set the value of password
      *
-     * @param  string  $password
+     * @param string $password
      *
-     * @return  self
+     * @return self
      */
     public function setPassword($password)
     {

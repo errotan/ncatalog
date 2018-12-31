@@ -24,27 +24,27 @@ class File
     private $id;
 
     /**
-     * @var int
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Application\Entity\User")
-     * @ORM\JoinColumn(referencedColumnName="id",nullable=false,onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="uploadedById",nullable=false,onDelete="CASCADE")
      */
     private $uploadedBy;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
      * @ORM\Column(type="datetime")
      */
     private $uploadedAt;
 
     /**
-     * @var int
+     * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Application\Entity\Category")
-     * @ORM\JoinColumn(referencedColumnName="id",nullable=false,onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="categoryId",nullable=false,onDelete="CASCADE")
      */
-    private $categoryId;
+    private $category;
 
     /**
      * @var string
@@ -85,7 +85,7 @@ class File
     /**
      * Get the value of id
      *
-     * @return  int
+     * @return int
      */
     public function getId()
     {
@@ -95,9 +95,9 @@ class File
     /**
      * Set the value of id
      *
-     * @param  int  $id
+     * @param int $id
      *
-     * @return  self
+     * @return self
      */
     public function setId($id)
     {
@@ -109,7 +109,7 @@ class File
     /**
      * Get the value of uploadedBy
      *
-     * @return  int
+     * @return User
      */
     public function getUploadedBy()
     {
@@ -119,9 +119,9 @@ class File
     /**
      * Set the value of uploadedBy
      *
-     * @param  int  $uploadedBy
+     * @param User $uploadedBy
      *
-     * @return  self
+     * @return self
      */
     public function setUploadedBy($uploadedBy)
     {
@@ -133,7 +133,7 @@ class File
     /**
      * Get the value of uploadedAt
      *
-     * @return  DateTime
+     * @return DateTime
      */
     public function getUploadedAt()
     {
@@ -143,9 +143,9 @@ class File
     /**
      * Set the value of uploadedAt
      *
-     * @param  DateTime  $uploadedAt
+     * @param \DateTime $uploadedAt
      *
-     * @return  self
+     * @return self
      */
     public function setUploadedAt(\DateTime $uploadedAt)
     {
@@ -155,25 +155,25 @@ class File
     }
 
     /**
-     * Get the value of categoryId
+     * Get the value of category
      *
-     * @return  int
+     * @return Category
      */
-    public function getCategoryId()
+    public function getCategory()
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
     /**
-     * Set the value of categoryId
+     * Set the value of category
      *
-     * @param  int  $categoryId
+     * @param Category $category
      *
-     * @return  self
+     * @return self
      */
-    public function setCategoryId($categoryId)
+    public function setCategory($category)
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
 
         return $this;
     }
@@ -181,7 +181,7 @@ class File
     /**
      * Get the value of originalName
      *
-     * @return  string
+     * @return string
      */
     public function getOriginalName()
     {
@@ -191,9 +191,9 @@ class File
     /**
      * Set the value of originalName
      *
-     * @param  string  $originalName
+     * @param string $originalName
      *
-     * @return  self
+     * @return self
      */
     public function setOriginalName($originalName)
     {
@@ -205,7 +205,7 @@ class File
     /**
      * Get the value of displayName
      *
-     * @return  string
+     * @return string
      */
     public function getDisplayName()
     {
@@ -215,9 +215,9 @@ class File
     /**
      * Set the value of displayName
      *
-     * @param  string  $displayName
+     * @param string $displayName
      *
-     * @return  self
+     * @return self
      */
     public function setDisplayName($displayName)
     {
@@ -229,7 +229,7 @@ class File
     /**
      * Get the value of version
      *
-     * @return  int
+     * @return int
      */
     public function getVersion()
     {
@@ -239,9 +239,9 @@ class File
     /**
      * Set the value of version
      *
-     * @param  int  $version
+     * @param int $version
      *
-     * @return  self
+     * @return self
      */
     public function setVersion($version)
     {
@@ -253,7 +253,7 @@ class File
     /**
      * Get the value of overriden
      *
-     * @return  bool
+     * @return bool
      */
     public function getOverriden()
     {
@@ -263,9 +263,9 @@ class File
     /**
      * Set the value of overriden
      *
-     * @param  bool  $overriden
+     * @param bool $overriden
      *
-     * @return  self
+     * @return self
      */
     public function setOverriden($overriden)
     {

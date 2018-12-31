@@ -22,11 +22,13 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findAllAsTree()
     {
-        $categories = $this->findBy([], ['parentId' => 'ASC', 'name' => 'ASC']);
+        $categories = $this->findBy([], ['parent' => 'ASC', 'name' => 'ASC']);
         $childs = [];
 
         foreach ($categories as $category) {
-            $childs[$category->getParentId()][] = $category;
+            $parent = $category->getParent();
+
+            $childs[$parent ? $parent->getId() : 0][] = $category;
         }
 
         foreach ($categories as $category) {
@@ -41,18 +43,19 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Returns an array which contains the category and parent category names.
      *
-     * @param int $categoryId category id
+     * @param int|null $categoryId
      *
      * @return array
      */
     public function findPath($categoryId)
     {
-        if (0 === $categoryId) {
+        if (null === $categoryId) {
             return [];
         }
 
         $category = $this->find($categoryId);
-        $pathName = array_merge($this->findPath($category->getParentId()), [$category->getName()]);
+        $parentName = $this->findPath($category->getParent() ? $category->getParent()->getId() : null);
+        $pathName = array_merge($parentName, [$category->getName()]);
 
         return array_filter($pathName);
     }

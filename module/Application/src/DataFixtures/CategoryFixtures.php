@@ -29,34 +29,32 @@ class CategoryFixtures implements FixtureInterface
         $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
         $metadata->setIdGenerator(new AssignedGenerator());
 
-        $category = new Category();
-        $category->setId(1);
-        $category->setName('Levelek');
-        $category->setParentId(0);
+        $firstCategory = (new Category())
+            ->setId(1)
+            ->setName('Levelek');
+        $manager->persist($firstCategory);
+
+        $category = (new Category())
+            ->setId(2)
+            ->setName('Iratok');
         $manager->persist($category);
 
-        $category = new Category();
-        $category->setId(2);
-        $category->setName('Iratok');
-        $category->setParentId(0);
+        $category = (new Category())
+            ->setId(3)
+            ->setName('Bejövő')
+            ->setParent($firstCategory);
         $manager->persist($category);
 
-        $category = new Category();
-        $category->setId(3);
-        $category->setName('Bejövő');
-        $category->setParentId(1);
-        $manager->persist($category);
+        $outCategory = (new Category())
+            ->setId(4)
+            ->setName('Kimenő')
+            ->setParent($firstCategory);
+        $manager->persist($outCategory);
 
-        $category = new Category();
-        $category->setId(4);
-        $category->setName('Kimenő');
-        $category->setParentId(1);
-        $manager->persist($category);
-
-        $category = new Category();
-        $category->setId(5);
-        $category->setName('2019');
-        $category->setParentId(4);
+        $category = (new Category())
+            ->setId(5)
+            ->setName('2019')
+            ->setParent($outCategory);
         $manager->persist($category);
 
         $manager->flush();

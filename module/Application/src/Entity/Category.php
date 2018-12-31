@@ -31,16 +31,17 @@ class Category
     private $name;
 
     /**
-     * @var int
+     * @var Category
      *
-     * @ORM\Column(type="smallint", options={"unsigned"=true})
+     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\JoinColumn(name="parentId",onDelete="CASCADE")
      */
-    private $parentId;
+    private $parent;
 
     /**
      * Get the value of id
      *
-     * @return  int
+     * @return int
      */
     public function getId()
     {
@@ -50,9 +51,9 @@ class Category
     /**
      * Set the value of id
      *
-     * @param  int  $id
+     * @param int $id
      *
-     * @return  self
+     * @return self
      */
     public function setId($id)
     {
@@ -64,7 +65,7 @@ class Category
     /**
      * Get the value of name
      *
-     * @return  string
+     * @return string
      */
     public function getName()
     {
@@ -74,9 +75,9 @@ class Category
     /**
      * Set the value of name
      *
-     * @param  string  $name
+     * @param string $name
      *
-     * @return  self
+     * @return self
      */
     public function setName($name)
     {
@@ -86,25 +87,25 @@ class Category
     }
 
     /**
-     * Get the value of parentId
+     * Get the value of parent
      *
-     * @return  int
+     * @return Category
      */
-    public function getParentId()
+    public function getParent()
     {
-        return $this->parentId;
+        return $this->parent;
     }
 
     /**
-     * Set the value of parentId
+     * Set the value of parent
      *
-     * @param  int  $parentId
+     * @param Category $parent
      *
-     * @return  self
+     * @return self
      */
-    public function setParentId($parentId)
+    public function setParent($parent)
     {
-        $this->parentId = $parentId;
+        $this->parent = $parent;
 
         return $this;
     }

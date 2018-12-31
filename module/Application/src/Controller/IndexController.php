@@ -29,10 +29,9 @@ class IndexController extends AbstractController
         $view = new ViewModel(['categories' => $categories]);
 
         if ($categoryId = $this->params()->fromRoute('categoryId')) {
-            $categoryPath = $repository->findPath($categoryId);
-            $files = $this->em->getRepository(File::class)->findBy(['categoryId' => $categoryId, 'overriden' => 0]);
+            $files = $this->em->getRepository(File::class)->findBy(['category' => $categoryId, 'overriden' => false]);
 
-            $view->setVariables(['categoryPath' => $categoryPath]);
+            $view->setVariables(['categoryPath' => $repository->findPath($categoryId)]);
             $view->setVariables(['categoryId' => $categoryId]);
             $view->setVariables(['files' => $files]);
         }
