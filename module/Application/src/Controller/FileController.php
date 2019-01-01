@@ -11,6 +11,7 @@ use Zend\Filter\HtmlEntities;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response\Stream;
 use Zend\Http\Headers;
+use Application\Entity\Acl;
 use Application\Entity\Category;
 use Application\Entity\File;
 use Application\Entity\User;
@@ -56,6 +57,10 @@ class FileController extends AbstractController
         $user = $this->em->getRepository(User::class)->find(1); // TODO: id from session
         $category = $this->em->getRepository(Category::class)->find($categoryId);
 
+        if (!$this->em->getRepository(Acl::class)->canUpload(1, $categoryId)) {
+            return $this->getResponse()->setStatusCode(403)->setContent('Nincs jogosultsága a művelethez!');
+        }
+
         // search for files with same name
         $alreadyUploadedFile = $this->em->getRepository(File::class)->alreadyUploaded($categoryId, $originalName);
         $version = 1;
@@ -97,6 +102,10 @@ class FileController extends AbstractController
         if (!is_readable($path) || !$file) {
             // no not found exception in zend :(
             return $this->getResponse()->setStatusCode(404)->setContent('A kért fájl nem található!');
+        }
+
+        if (!$this->em->getRepository(Acl::class)->canUpload(1, $file->getCategory()->getId())) {
+            return $this->getResponse()->setStatusCode(403)->setContent('Nincs jogosultsága a művelethez!');
         }
 
         $response = new Stream();

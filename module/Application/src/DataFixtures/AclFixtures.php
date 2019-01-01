@@ -37,7 +37,6 @@ class AclFixtures extends AbstractFixture implements DependentFixtureInterface
         $acl = (new Acl())
             ->setId(1)
             ->setUser($user)
-            ->setCanCreateCategory(true)
             ->setCanUpload(true)
             ->setCanDownload(true);
 

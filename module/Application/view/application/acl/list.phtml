@@ -4,7 +4,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Kategória</th>
-            <th scope="col">Készíthet alkategóriát</th>
             <th scope="col">Feltölthet</th>
             <th scope="col">Letölthet</th>
             <th scope="col"></th>
@@ -15,7 +14,6 @@
             <tr>
                 <th scope="row"><?= ++$i ?></th>
                 <td><?= $acl->getCategory() ? $acl->getCategory()->getName() : '-minden-' ?></td>
-                <td><?= $acl->getCanCreateCategory() ? 'Igen' : 'Nem' ?></td>
                 <td><?= $acl->getCanUpload() ? 'Igen' : 'Nem' ?></td>
                 <td><?= $acl->getCanDownload() ? 'Igen' : 'Nem' ?></td>
                 <td>

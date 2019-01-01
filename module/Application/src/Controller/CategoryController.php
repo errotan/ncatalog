@@ -9,6 +9,7 @@ namespace Application\Controller;
 
 use Zend\Filter\HtmlEntities;
 use Zend\View\Model\ViewModel;
+use Application\Entity\Acl;
 use Application\Entity\Category;
 use Application\Controller\AbstractController;
 
@@ -26,7 +27,7 @@ class CategoryController extends AbstractController
         $view->setTerminal(true);
 
         $categoryId = $this->params()->fromRoute('categoryId');
-        $category = $this->em->getRepository(Category::class)->find($categoryId);
+        $category = $this->em->find(Category::class, $categoryId);
 
         if (!$category) {
             // no not found exception in zend :(
@@ -34,6 +35,10 @@ class CategoryController extends AbstractController
         }
 
         if ('POST' === $this->getRequest()->getMethod()) {
+            if (!$this->em->getRepository(Acl::class)->canUpload(1, $category->getId())) {
+                return $this->getResponse()->setStatusCode(403)->setContent('Nincs jogosultsága a művelethez!');
+            }
+
             $filter = new HtmlEntities();
             $category->setName($filter->filter($this->params()->fromPost('name')));
 
@@ -51,16 +56,21 @@ class CategoryController extends AbstractController
      */
     public function newAction()
     {
-        $view = new ViewModel(['parentId' => $this->params()->fromRoute('parentId')]);
+        $parentId = $this->params()->fromRoute('parentId');
+        $view = new ViewModel(['parentId' => $parentId]);
         $view->setTerminal(true);
 
         if ('POST' === $this->getRequest()->getMethod()) {
+            if (!$this->em->getRepository(Acl::class)->canUpload(1, $parentId)) {
+                return $this->getResponse()->setStatusCode(403)->setContent('Nincs jogosultsága a művelethez!');
+            }
+
             $filter = new HtmlEntities();
             $category = (new Category())
                 ->setName($filter->filter($this->params()->fromPost('name')));
 
-            if ($parentId = $this->params()->fromRoute('parentId')) {
-                $parentCategory = $this->em->getRepository(Category::class)->find($parentId);
+            if ($parentId) {
+                $parentCategory = $this->em->find(Category::class, $parentId);
                 $category->setParent($parentCategory);
             }
 
@@ -76,9 +86,13 @@ class CategoryController extends AbstractController
      */
     public function deleteAction()
     {
-        $category = $this->em->getRepository(Category::class)->find($this->params()->fromRoute('categoryId'));
+        $category = $this->em->find(Category::class, $this->params()->fromRoute('categoryId'));
 
         if ($category) {
+            if (!$this->em->getRepository(Acl::class)->canUpload(1, $category->getId())) {
+                return $this->getResponse()->setStatusCode(403)->setContent('Nincs jogosultsága a művelethez!');
+            }
+
             $this->em->remove($category);
             $this->em->flush();
         } else {

@@ -44,13 +44,6 @@ class Acl
      *
      * @ORM\Column(type="boolean")
      */
-    private $canCreateCategory;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
-     */
     private $canUpload;
 
     /**
@@ -128,30 +121,6 @@ class Acl
     public function setCategory($category)
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of canCreateCategory
-     *
-     * @return bool
-     */
-    public function getCanCreateCategory()
-    {
-        return $this->canCreateCategory;
-    }
-
-    /**
-     * Set the value of canCreateCategory
-     *
-     * @param bool $canCreateCategory
-     *
-     * @return self
-     */
-    public function setCanCreateCategory($canCreateCategory)
-    {
-        $this->canCreateCategory = $canCreateCategory;
 
         return $this;
     }

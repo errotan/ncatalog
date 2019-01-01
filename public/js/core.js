@@ -53,7 +53,9 @@ $(function() {
 
             $.get(url, function() {
                 showSuccessAndGoHome();
-            })
+            }).fail(function(jqXHR) {
+                alert('Hiba történt a kérés elküldésekor! ' + jqXHR.responseText);
+            });
         }
     });
 });

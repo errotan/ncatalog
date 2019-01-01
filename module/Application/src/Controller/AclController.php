@@ -53,8 +53,7 @@ class AclController extends AbstractController
         $acl = $this->em->find(Acl::class, $this->params()->fromRoute('aclId'));
 
         if ('POST' === $this->getRequest()->getMethod()) {
-            $acl->setCanCreateCategory((bool) $this->params()->fromPost('cancreatecategory'))
-                ->setCanUpload((bool) $this->params()->fromPost('canupload'))
+            $acl->setCanUpload((bool) $this->params()->fromPost('canupload'))
                 ->setCanDownload((bool) $this->params()->fromPost('candownload'));
 
             $this->em->persist($acl);
@@ -94,7 +93,6 @@ class AclController extends AbstractController
 
             $acl = (new Acl())
                 ->setUser($user)
-                ->setCanCreateCategory((bool) $this->params()->fromPost('cancreatecategory'))
                 ->setCanUpload((bool) $this->params()->fromPost('canupload'))
                 ->setCanDownload((bool) $this->params()->fromPost('candownload'));
 

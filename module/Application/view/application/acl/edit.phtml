@@ -1,32 +1,26 @@
 <h4>Jogosultság szerkesztése</h4>
 <form method="post" action="<?= $this->basePath('acl/edit/'.$acl->getId()) ?>">
 <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="staticUser">Felhasználó</label>
+        <label class="col-sm-2 col-form-label" for="staticUser">Felhasználó</label>
         <div class="col-sm-6">
             <input type="text" readonly class="form-control-plaintext" id="staticUser" value="<?= $acl->getUser()->getFullName() ?>">
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="staticCategory">Kategória</label>
+        <label class="col-sm-2 col-form-label" for="staticCategory">Kategória</label>
         <div class="col-sm-6">
             <input type="text" readonly class="form-control-plaintext" id="staticCategory" value="<?= $acl->getCategory() ? $acl->getCategory()->getName() : '-minden-' ?>">
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="exampleCheck1">Készíthet alkategóriát</label>
-        <div class="col-sm-6">
-            <input type="checkbox" name="cancreatecategory" class="form-check-input" id="exampleCheck1" <?= $acl->getCanCreateCategory() ? 'checked="checked"' : '' ?>>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="exampleCheck2">Feltölthet</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-form-label" for="exampleCheck2">Feltölthet</label>
+        <div class="col-sm-6 ml-4">
             <input type="checkbox" name="canupload" class="form-check-input" id="exampleCheck2" <?= $acl->getCanUpload() ? 'checked="checked"' : '' ?>>
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label" for="exampleCheck3">Letölthet</label>
-        <div class="col-sm-6">
+        <label class="col-sm-2 col-form-label" for="exampleCheck3">Letölthet</label>
+        <div class="col-sm-6 ml-4">
             <input type="checkbox" name="candownload" class="form-check-input" id="exampleCheck3" <?= $acl->getCanDownload() ? 'checked="checked"' : '' ?>>
         </div>
     </div>
