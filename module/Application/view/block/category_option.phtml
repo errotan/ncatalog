@@ -1,6 +1,6 @@
 <?php foreach ($categories as $category): ?>
     <option value="<?= $category->getId() ?>"><?= $parentName.$category->getName() ?></option>
     <?php if (!empty($category->childs)): ?>
-        <?= $this->partial('block/category_option', ['categories' => $category->childs, 'parentName' => $category->getName().' > ']) ?>
+        <?= $this->partial('block/category_option', ['categories' => $category->childs, 'parentName' => $parentName.$category->getName().' > ']) ?>
     <?php endif; ?>
 <?php endforeach; ?>
