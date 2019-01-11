@@ -104,7 +104,7 @@ class FileController extends AbstractController
             return $this->getResponse()->setStatusCode(404)->setContent('A kért fájl nem található!');
         }
 
-        if (!$this->em->getRepository(Acl::class)->canUpload(1, $file->getCategory()->getId())) {
+        if (!$this->em->getRepository(Acl::class)->canDownload(1, $file->getCategory()->getId())) {
             return $this->getResponse()->setStatusCode(403)->setContent('Nincs jogosultsága a művelethez!');
         }
 
